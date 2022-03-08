@@ -1,12 +1,13 @@
 <template>
-  hhhh
+   here we go coordinators
 </template>
 
 <script>
-
 export default {
-  name: "Home",
-  components: {
-  },
-};
+
+}
 </script>
+
+<style>
+
+</style>
