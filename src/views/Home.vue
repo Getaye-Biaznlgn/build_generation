@@ -1,12 +1,8 @@
-<template>
-  hhhh
-</template>
+<template>hhhh</template>
 
 <script>
-
 export default {
   name: "Home",
-  components: {
-  },
+  components: {},
 };
 </script>

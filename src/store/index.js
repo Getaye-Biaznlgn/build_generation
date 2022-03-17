@@ -1,33 +1,33 @@
 import { createStore } from "vuex";
-
+import region from "./region";
+import zone from "./zone";
+import auth from "./auth";
 export default createStore({
-  state: {
-    isAuthenticated:false,
-    token:null,
-    user:null
+  modules: {
+    region,
+    zone,
+    auth,
   },
-  gettters:{
-    isAuthenticated(state){
-      return state.isAuthenticated;
+  state: {
+    isLoading: false,
+    //to store each detail, it should be passed on as a param
+    institution: "",
+  },
+  getters: {
+    isLoading(state) {
+      return state.isLoading;
     },
-    token(state){
-      return state.token;
+    institution(state) {
+      return state.institution;
     },
-    user(state){
-      return state.user;
-    }
   },
   mutations: {
-    setIsAuthenticated(state, payload){
-      state.isAuthenticated=payload
+    setIsLoading(state, payload) {
+      state.isLoading = payload;
     },
-    setToken(state, payload){
-      state.token=payload
+    setInstitution(state, payload) {
+      state.institution = payload;
     },
-    setUser(state, payload){
-      state.user=payload
-    }
   },
   actions: {},
-  modules: {},
 });
