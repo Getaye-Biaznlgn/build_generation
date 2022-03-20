@@ -7,7 +7,7 @@
           v-model="regionIdForFilter"
           aria-label="selectFilte"
         >
-          <option value="all">Region</option>
+          <option value=" ">Region</option>
           <option v-for="region in regions" :Key="region.id" :value="region.id">
             {{ region.name }}
           </option>
@@ -19,7 +19,7 @@
           v-model="zoneIdForFilter"
           aria-label="selectFilterRegion"
         >
-          <option value="all">Zone</option>
+          <option value=" ">Zone</option>
           <option v-for="zone in filteredZones" :key="zone.id" :value="zone.id">
             {{ zone.name }}
           </option>
@@ -315,8 +315,8 @@ export default {
       errorMessage: "",
       images: [],
       uploadPercentage: 0,
-      regionIdForFilter: "all",
-      zoneIdForFilter: "all",
+      regionIdForFilter: " ",
+      zoneIdForFilter: " ",
       institution: {
         title: "",
         type: "health",

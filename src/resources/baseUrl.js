@@ -1,7 +1,6 @@
-/* eslint-disable prettier/prettier */
 import axios from "axios";
 let apiClient = axios.create({
-  baseURL: "http://10.161.178.167:80",
+  baseURL: "https://build-generation.merahitechnologies.com",
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",

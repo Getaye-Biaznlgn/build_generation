@@ -3,11 +3,12 @@
     <div class="d-flex">
       <div class="pe-2">
         <select
+          @change="handleRegionFilter($event)"
           class="form-select"
           v-model="regionIdForFilter"
           aria-label="selectFilte"
         >
-          <option value="all">Region</option>
+          <option value=" ">Region</option>
           <option v-for="region in regions" :Key="region.id" :value="region.id">
             {{ region.name }}
           </option>
@@ -16,10 +17,11 @@
       <div class="pe-2">
         <select
           class="form-select"
+          @change="handleZoneFilter($event)"
           v-model="zoneIdForFilter"
           aria-label="selectFilterRegion"
         >
-          <option value="all">Zone</option>
+          <option value=" ">Zone</option>
           <option v-for="zone in filteredZones" :key="zone.id" :value="zone.id">
             {{ zone.name }}
           </option>
@@ -315,8 +317,8 @@ export default {
       uploadPercentage: 0,
       errorMessage: "",
       images: [],
-      regionIdForFilter: "all",
-      zoneIdForFilter: "all",
+      regionIdForFilter: " ",
+      zoneIdForFilter: " ",
       institution: {
         title: "",
         type: "Education",
@@ -347,6 +349,12 @@ export default {
     },
   },
   methods: {
+    handleRegionFilter() {
+      this.fetchEducationalInstitutions(10, 1);
+    },
+    handleZoneFilter() {
+      this.fetchEducationalInstitutions(10, 1);
+    },
     setImages(images) {
       this.images = [...images];
     },
@@ -448,7 +456,7 @@ export default {
       try {
         this.$store.commit("setIsLoading", true);
         const response = await apiClient.get(
-          `/api/posts?type=education&&per_page=${perPage}&&page_no=${pageNo}`
+          `/api/posts?type=education&&per_page=${perPage}&&page_no=${pageNo}&&region=${this.regionIdForFilter}&&zone=${this.zoneIdForFilter}`
         );
         if (response.status === 200) {
           this.educationalInstitutions = response.data.data;

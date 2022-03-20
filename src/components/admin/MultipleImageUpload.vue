@@ -1,56 +1,74 @@
 <template>
-  <div id="Image-chooser">
-    <div class="input-container text-center">
-      <input
-        class="image-input"
-        id="file-upload"
-        type="file"
-        multiple
-        @change="uploadImage"
-      />
-      <label for="file-upload" class="choose-btn">Chosse Images</label>
-      <div v-if="imageFiles.length" class="mt-3 text-white">
-        {{ imageFiles.length + " Images Choosen" }}
-      </div>
+  <div class="text-center wraper p-5">
+    <input
+      class="image-input"
+      type="file"
+      name="imageInpute"
+      id="imageInpute"
+      ref="imageHolder"
+      accept="image/.*"
+      multiple
+      @change="fileHandler($event)"
+    />
+    <div
+      class="imageContainer"
+      :class="{ active: isActive }"
+      @dragenter.prevent="activatClass()"
+      @dragleave="activatClass()"
+      @dragover.prevent=""
+      @drop.prevent="fileHandler($event)"
+    >
+      <label for="imageInpute">
+        <div class="fs-2 uploadIcon"><i class="fas fa-upload"></i></div>
+        <p>Drag and drop Images here or</p>
+        <div class="btn btnSelect m-2">Select Images</div>
+        <div v-if="imageFiles?.length" class="m-2 text-black">
+          {{ imageFiles?.length + " Images Choosen" }}
+        </div>
+      </label>
     </div>
-    <div class="w-100 d-flex mb-3">
-      <div v-for="(image, key) in imageFiles" :key="key" class="m-2 image-box">
-        <img v-bind:ref="'image'" class="img-fluid" :alt="image.name" src="" />
-        <button
-          type="button"
-          class="removebtn"
-          @click="removeImage(image, key)"
-        >
-          X
-        </button>
-      </div>
+  </div>
+  <!-- image preview -->
+  <div class="w-100 d-flex mb-3 imagePreview">
+    <div v-for="(image, key) in imageFiles" :key="key" class="m-2 image-box">
+      <img v-bind:ref="'image'" class="img-fluid" :alt="image.name" src="" />
+      <button
+        type="button"
+        class="removebtn fs-4"
+        @click="removeImage(image, key)"
+      >
+        X
+      </button>
     </div>
   </div>
 </template>
-
 <script>
 export default {
-  name: "App",
-  components: {},
   data() {
     return {
       imageFiles: [],
+      isActive: false,
     };
   },
   methods: {
-    uploadImage(e) {
-      let selectedFiles = e.target.files;
-      for (let i = 0; i < selectedFiles.length; i++) {
+    fileHandler(e) {
+      this.isActive = false;
+      let selectedFiles =
+        e.target.files || e.dataTransfer.files || this.$refs.imageHolder.files;
+      for (let i = 0; i < selectedFiles?.length; i++) {
         this.imageFiles.push(selectedFiles[i]);
       }
       this.$emit("saveImage", this.imageFiles);
+
       this.applyImage();
     },
-
     removeImage(image, index) {
+      //console.log(this.imageFiles);
       this.imageFiles.splice(index, 1);
       this.$emit("saveImage", this.imageFiles);
+
       this.applyImage();
+      //this.$refs.image[index].src = "" // You are hidding the 3rd one that is now in index 1.
     },
     applyImage() {
       for (let i = 0; i < this.imageFiles.length; i++) {
@@ -61,36 +79,53 @@ export default {
         reader.readAsDataURL(this.imageFiles[i]);
       }
     },
+    activatClass() {
+      this.isActive = !this.isActive;
+    },
   },
 };
 </script>
-
 <style scoped>
-#Image-chooser {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  /* text-align: center; */
-  color: #2c3e50;
-  margin-top: 10%;
-}
-.input-container {
-  width: 30%;
-  height: 20vh;
-  margin: auto;
-  border: 1px dashed rgb(61, 54, 54);
-  background-color: rgb(204, 204, 216);
-}
-.choose-btn {
+.wraper {
+  width: 100%;
+  margin-left: 10%;
   margin-top: 7%;
-  background-color: rgb(11, 11, 168);
-  color: #fff;
-  padding: 2%;
-  border: none;
+}
+.wraper input {
+  visibility: hidden;
+}
+.imageContainer {
+  width: 40%;
+  height: auto;
+  background: transparent;
+  border: 2px dashed gray;
+}
+label {
+  width: 100%;
+  height: 100%;
   cursor: pointer;
 }
-.image-input {
-  display: none;
+.btnSelect {
+  border: 1px solid gray;
+  background-color: rgb(134, 134, 177);
+  color: #fff;
+}
+.btnSelect:hover {
+  background-color: rgb(95, 95, 160);
+}
+.imageContainer:hover {
+  border-color: blue;
+}
+.uploadIcon:hover {
+  color: blue;
+}
+.active {
+  background-color: rgb(123, 123, 156);
+  color: #fff;
+  border-color: blue;
+}
+.imagePreview {
+  overflow-x: auto;
 }
 .image-box {
   width: 15%;
@@ -116,7 +151,7 @@ export default {
   transition: all 1s;
 }
 .image-box img:hover {
-  transform: scale(1.5) rotate(45deg);
+  transform: scale(1.2);
 }
 .image-box:hover .removebtn {
   display: block;
