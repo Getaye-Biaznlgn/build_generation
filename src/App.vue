@@ -25,7 +25,16 @@
 }
 
 form i {
-  /* margin-bottom: -1000px; */
   cursor: pointer;
+}
+.img {
+  height: 200px;
+  max-width: 100%;
+}
+@media (min-width: 801px) {
+  .img {
+    width: 300px;
+    height: 200px;
+  }
 }
 </style>

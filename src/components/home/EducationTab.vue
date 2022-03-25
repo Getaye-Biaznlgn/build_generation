@@ -1,12 +1,18 @@
 <template>
-  <education-item v-for="n in 3" :key="n" />
+  <institution-item
+    v-for="(item, index) in educationalInstitutions"
+    :key="item.id"
+    :institution="item"
+    :index="index"
+  />
 </template>
 
 <script>
-import EducationItem from "../EducationItem.vue";
+import InstitutionItem from "../InstitutionItem.vue";
 export default {
+  props: ["educationalInstitutions"],
   components: {
-    EducationItem,
+    InstitutionItem,
   },
 };
 </script>

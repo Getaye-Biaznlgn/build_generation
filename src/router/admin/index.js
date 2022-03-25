@@ -18,7 +18,7 @@ export default {
         ),
     },
     {
-      path: "/damaged-educational-institution",
+      path: "/admin/damaged-educational-institution",
       name: "EducationalInstitution",
       component: () =>
         import(
@@ -27,7 +27,7 @@ export default {
     },
 
     {
-      path: "/damaged-healthcare-institution",
+      path: "/admin/damaged-healthcare-institution",
       name: "HealthCareInstitution",
       component: () =>
         import(
@@ -35,7 +35,7 @@ export default {
         ),
     },
     {
-      path: "/institution-detail",
+      path: "/admin/institution-detail",
       name: "InstitutionDetail",
       component: () =>
         import(
@@ -46,19 +46,19 @@ export default {
       }),
     },
     {
-      path: "/damaged-region",
+      path: "/admin/damaged-region",
       name: "Region",
       component: () =>
         import(/* webpackChunkName: "Region" */ "../../views/admin/Region.vue"),
     },
     {
-      path: "/damaged-zone",
+      path: "/admin/damaged-zone",
       name: "Zone",
       component: () =>
         import(/* webpackChunkName: "Zone" */ "../../views/admin/Zone.vue"),
     },
     {
-      path: "/success-stories",
+      path: "/admin/success-stories",
       name: "SuccessStory",
       component: () =>
         import(
@@ -66,7 +66,7 @@ export default {
         ),
     },
     {
-      path: "/new-detail",
+      path: "/admin/new-detail",
       name: "NewsDetail",
       component: () =>
         import(
@@ -74,7 +74,7 @@ export default {
         ),
     },
     {
-      path: "/coordinator",
+      path: "/admin/coordinator",
       name: "Coordinator",
       component: () =>
         import(
@@ -82,7 +82,7 @@ export default {
         ),
     },
     {
-      path: "/account-setting",
+      path: "/admin/account-setting",
       name: "AccountSetting",
       component: () =>
         import(

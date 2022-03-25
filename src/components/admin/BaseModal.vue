@@ -29,12 +29,6 @@ export default {
       this.$emit("close");
     },
   },
-  mounted() {
-    // document.documentElement.style.overflow = "hidden";
-  },
-  beforeUnmount() {
-    // document.documentElement.style.overflow = "auto";
-  },
 };
 </script>
 <style scoped>
@@ -43,7 +37,7 @@ export default {
   z-index: 10;
 }
 .modal-body {
-  width: 35em;
+  width: 90%;
   z-index: 999;
   max-height: 80vh;
   overflow-y: auto;
@@ -71,4 +65,14 @@ export default {
   opacity: 0;
   transform: translateY(-60px);
 }
+@media (min-width: 801px) {
+  .modal-body {
+    width: 35em;
+  }
+}
+/* @media (min-width: 600px) {
+  .modal-body {
+    max-width: 5em !important;
+  }
+} */
 </style>

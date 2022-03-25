@@ -6,6 +6,7 @@
           class="form-select"
           v-model="regionIdForFilter"
           aria-label="selectFilte"
+          @change="handleFilter"
         >
           <option value=" ">Region</option>
           <option v-for="region in regions" :Key="region.id" :value="region.id">
@@ -15,6 +16,7 @@
       </div>
       <div class="pe-2">
         <select
+          @change="handleFilter"
           class="form-select"
           v-model="zoneIdForFilter"
           aria-label="selectFilterRegion"
@@ -347,6 +349,9 @@ export default {
     },
   },
   methods: {
+    handleFilter() {
+      this.fetchEducationalInstitutions(10, 1);
+    },
     setImages(images) {
       this.images = [...images];
     },
@@ -403,13 +408,13 @@ export default {
           if (response.status === 201) {
             this.educationalInstitutions.push(response.data);
             this.closeAddModal();
+            this.images = [];
           } else throw "";
         } catch (e) {
           this.errorMessage = "Failed to add damaged institution info";
         } finally {
           this.isLoading = false;
           this.uploadPercentage = 0;
-          this.images = [];
         }
       }
     },
@@ -448,7 +453,7 @@ export default {
       try {
         this.$store.commit("setIsLoading", true);
         const response = await apiClient.get(
-          `/api/posts?type=health&&per_page=${perPage}&&page_no=${pageNo}`
+          `/api/posts?type=health&&per_page=${perPage}&&page_no=${pageNo}&&region=${this.regionIdForFilter}&&zone=${this.zoneIdForFilter}`
         );
         if (response.status === 200) {
           this.educationalInstitutions = response.data.data;

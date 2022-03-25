@@ -79,6 +79,7 @@
         </td>
       </tr>
     </table>
+    <!-- pagination -->
     <div
       v-if="educationalInstitutions.length"
       class="mt-2 d-flex justify-content-end"
@@ -410,6 +411,7 @@ export default {
           });
           if (response.status === 201) {
             this.educationalInstitutions.push(response.data);
+            this.images = [];
             this.closeAddModal();
           } else throw "";
         } catch (e) {
@@ -417,7 +419,6 @@ export default {
         } finally {
           this.isLoading = false;
           this.uploadPercentage = 0;
-          this.images = [];
         }
       }
     },

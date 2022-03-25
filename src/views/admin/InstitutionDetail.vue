@@ -267,7 +267,6 @@ export default {
     dismissAlert() {
       this.timeout = setTimeout(() => {
         this.isAlertVisible = false;
-        this.newImages = [];
         this.uploadPercentage = 0;
       }, 3000);
     },
@@ -290,6 +289,7 @@ export default {
           this.isAlertVisible = true;
           this.alertMessage = "Images has been uploaded successfully!";
           this.isRequestSucceed = true;
+          this.newImages = [];
         } else throw "";
       } catch (e) {
         this.isAlertVisible = true;
@@ -364,9 +364,6 @@ export default {
     clearTimeout(this.timeout);
   },
   created() {
-    //to set params value
-    // this.institution = { ...this.institute };
-
     this.institution = {
       ...this.institutionDetail,
       region_id: this.institutionDetail?.region?.id,

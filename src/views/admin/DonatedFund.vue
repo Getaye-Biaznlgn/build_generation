@@ -21,13 +21,7 @@
         <td>{{ fund.donation_amount }}</td>
         <td>{{ fund.donated_for?.name }}</td>
         <td>
-          {{
-            new Date(fund.created_at)
-              .toString()
-              .split(" ")
-              .slice(0, 4)
-              .join(" ")
-          }}
+          {{ fund.created_at }}
         </td>
       </tr>
     </table>

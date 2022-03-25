@@ -349,13 +349,13 @@ export default {
           if (response.status === 201) {
             this.news.push(response.data);
             this.closeAddModal();
+            this.images = [];
           } else throw "";
         } catch (e) {
           this.errorMessage = "Failed to add damaged institution info";
         } finally {
           this.isLoading = false;
           this.uploadPercentage = 0;
-          this.images = [];
         }
       }
     },
